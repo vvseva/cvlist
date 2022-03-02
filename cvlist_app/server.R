@@ -32,9 +32,13 @@ server <- function(input, output, session) {
            Telegram = to_href(str_c("https://telegram.me/", Telegram), Telegram)
            ) %>% 
   renderDT(
+    extensions = 'Buttons',
+    rownames= FALSE,
     filter = 'top',
     escape = FALSE,
-    options = list(pageLength = 100, autoWidth = TRUE)
+    options = list(pageLength = 100, 
+                   autoWidth = TRUE,
+                   buttons = c('csv', 'excel'))
   )
   
   # observeEvent(input$add, {
