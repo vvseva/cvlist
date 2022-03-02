@@ -5,7 +5,7 @@ library(DT)
 library(dplyr)
 library(stringr)
 
-gs4_auth(path = ".secrets/cvlist-5a763ac3f721.json")
+gs4_auth(path = "cvlist-5a763ac3f721.json")
 
 to_href <- function(link, link_text){
   str_c(
@@ -18,10 +18,13 @@ to_mail <- function(mail){
 }
 
 server <- function(input, output, session) {
-  output$tbl <- read_sheet(
+   df = read_sheet(
     "https://docs.google.com/spreadsheets/d/1WimbMiZD38FyCeek5Rxj7LnLW-ii7Yl55jBzQTN4DKE/edit?usp=sharing",
     range = "Candidates"
-  ) %>% 
+  ) 
+  data_row <- df[sample(1:nrow(df)), ]
+  
+  output$tbl <- data_row %>% 
     select(-Status) %>% 
     mutate(LinkedIn = to_href(LinkedIn, LinkedIn),
            `Resume/CV` = to_href(`Resume/CV`, "CV"),

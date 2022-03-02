@@ -22,6 +22,6 @@ ui <- # Define UI for application that plots random distributions
     fluidRow(),
     # Show a plot of the generated distribution
     fluidRow(column(
-      10,
+      8,
       DTOutput("tbl")
     )))
